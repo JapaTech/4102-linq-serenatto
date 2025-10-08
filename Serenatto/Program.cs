@@ -75,25 +75,25 @@ using (var context = new SerenattoContext())
 
             string query = "INSERT INTO Produtos(Id, Nome, Preco, Descricao) VALUES(@Id, @Nome, @Preco, @Descricao)";
 
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@Id", Guid.NewGuid());
-                command.Parameters.AddWithValue("@Nome",
-     nome);
-                command.Parameters.AddWithValue("@Preco", preco);
-                command.Parameters.AddWithValue("@Descricao", descricao);
+     //       using (SqlCommand command = new SqlCommand(query, connection))
+     //       {
+     //           command.Parameters.AddWithValue("@Id", Guid.NewGuid());
+     //           command.Parameters.AddWithValue("@Nome",
+     //nome);
+     //           command.Parameters.AddWithValue("@Preco", preco);
+     //           command.Parameters.AddWithValue("@Descricao", descricao);
 
-                int rowsAffected = command.ExecuteNonQuery();
+     //           int rowsAffected = command.ExecuteNonQuery();
 
-                if (rowsAffected > 0)
-                {
-                    Console.WriteLine("Produto cadastrado com sucesso!");
-                }
-                else
-                {
-                    Console.WriteLine("Erro ao cadastrar o produto.");
-                }
-            }
+     //           if (rowsAffected > 0)
+     //           {
+     //               Console.WriteLine("Produto cadastrado com sucesso!");
+     //           }
+     //           else
+     //           {
+     //               Console.WriteLine("Erro ao cadastrar o produto.");
+     //           }
+     //       }
         }
     }
 
@@ -109,44 +109,44 @@ using (var context = new SerenattoContext())
         Console.WriteLine("------------------");
         Console.WriteLine("ID\tNome\tPreço\tDescrição");
 
-        foreach (var produto in produtos) 
-        { 
+        foreach (var produto in produtos)
+        {
             Console.WriteLine($"{produto.Id}\t{produto.Nome}\t{produto.Preco}\t{produto.Descricao}");
         }
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
+        //using (SqlConnection connection = new SqlConnection(connectionString))
+        //{
+        //    connection.Open();
 
-            string query = "SELECT * FROM Produtos";
+        //    string query = "SELECT * FROM Produtos";
 
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                using (SqlDataReader reader = command.ExecuteReader())
+        //    using (SqlCommand command = new SqlCommand(query, connection))
+        //    {
+        //        using (SqlDataReader reader = command.ExecuteReader())
 
-                {
-                    if (!reader.HasRows)
-                    {
-                        Console.WriteLine("Não há produtos cadastrados.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Lista de produtos:");
-                        Console.WriteLine("------------------");
-                        Console.WriteLine("ID\tNome\tPreço\tDescrição");
+        //        {
+        //            if (!reader.HasRows)
+        //            {
+        //                Console.WriteLine("Não há produtos cadastrados.");
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("Lista de produtos:");
+        //                Console.WriteLine("------------------");
+        //                Console.WriteLine("ID\tNome\tPreço\tDescrição");
 
-                        while (reader.Read())
-                        {
-                            Guid id = reader.GetGuid(0);
-                            string nome = reader.GetString(1);
-                            decimal preco = reader.GetDecimal(2);
-                            string descricao = reader.GetString(3);
+        //                while (reader.Read())
+        //                {
+        //                    Guid id = reader.GetGuid(0);
+        //                    string nome = reader.GetString(1);
+        //                    decimal preco = reader.GetDecimal(2);
+        //                    string descricao = reader.GetString(3);
 
-                            Console.WriteLine($"{id}\t{nome}\t{preco}\t{descricao}");
-                        }
-                    }
-                }
-            }
-        }
+        //                    Console.WriteLine($"{id}\t{nome}\t{preco}\t{descricao}");
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     static void AtualizarProduto(SerenattoContext context)
