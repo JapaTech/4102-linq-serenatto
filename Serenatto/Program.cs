@@ -27,10 +27,10 @@ using (var context = new SerenattoContext())
         switch (opcao)
         {
             case 1:
-                CadastrarProduto(context);
+                CadastrarProduto(context, connectionString);
                 break;
             case 2:
-                ListarProdutos(context);
+                ListarProdutos(context, connectionString);
                 break;
             case 3:
                 AtualizarProduto(context);
@@ -50,7 +50,7 @@ using (var context = new SerenattoContext())
 
     }
 
-    static void CadastrarProduto(SerenattoContext context)
+    static void CadastrarProduto(SerenattoContext context, string connectionString)
     {
         Console.Write("Nome do produto: ");
         string nome = Console.ReadLine();
@@ -69,7 +69,7 @@ using (var context = new SerenattoContext())
 
         Console.WriteLine("Produto cadastrado com sucesso!");
 
-        /*using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
@@ -94,10 +94,10 @@ using (var context = new SerenattoContext())
                     Console.WriteLine("Erro ao cadastrar o produto.");
                 }
             }
-        }*/
+        }
     }
 
-    static void ListarProdutos(SerenattoContext context)
+    static void ListarProdutos(SerenattoContext context, string connectionString)
     {
         var produtos = context.Produtos.ToList();
         if (produtos.Count == 0)
@@ -113,7 +113,7 @@ using (var context = new SerenattoContext())
         { 
             Console.WriteLine($"{produto.Id}\t{produto.Nome}\t{produto.Preco}\t{produto.Descricao}");
         }
-        /*using (SqlConnection connection = new SqlConnection(connectionString))
+        using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
 
@@ -146,7 +146,7 @@ using (var context = new SerenattoContext())
                     }
                 }
             }
-        }*/
+        }
     }
 
     static void AtualizarProduto(SerenattoContext context)
